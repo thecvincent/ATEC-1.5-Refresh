@@ -1,0 +1,150 @@
+<link rel="stylesheet" type="text/css" href="/atec/css/flexslider.css" />
+<link rel="stylesheet" type="text/css" href="/atec/css/jquery.fancybox-1.3.4.css"/>
+<link rel="stylesheet" type="text/css" href="/atec/css/epicfullscreen.css" />
+<link rel="stylesheet" type="text/css" href="/atec/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/atec/css/udt_shortcodes.css" />
+<link rel="stylesheet" type="text/css" href="/atec/css/udt_media_queries.css" />
+<!--font-->
+<link rel="stylesheet" type="text/css" href="/atec/css/font/bebasneue.css"  charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand" />
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!--js-->
+<script type="text/javascript" src="http://use.typekit.net/vsc6kcv.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="/atec/js/iOS-timer.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/atec/js/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="/atec/js/common.js"></script>
+<script type="text/javascript" src="/atec/js/jquery.epicHover-fadeZoom.js"></script>
+<script type="text/javascript" src="/atec/js/jquery.epicfullscreen.js"></script>
+<script type="text/javascript" src="/atec/js/jquery.masonry.js"></script>
+<script type="text/javascript" src="/atec/js/jquery.tweet.js"></script>
+<script type="text/javascript" src="/atec/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="/atec/js/jquery-ias.js"></script>
+
+
+<script type="text/javascript">
+	
+			/*device check
+			---------------------*/
+			
+			var isMobile = false;
+	
+			if( navigator.userAgent.match(/Android/i) || 
+				navigator.userAgent.match(/webOS/i) ||
+				navigator.userAgent.match(/iPhone/i) || 
+				navigator.userAgent.match(/iPad/i)|| 
+				navigator.userAgent.match(/iPod/i) || 
+				navigator.userAgent.match(/BlackBerry/i)){
+								
+					isMobile = true;
+							
+			}
+			
+			$(document).ready(function(){
+			
+				/*epic hover plugin
+				---------------------*/
+				
+				//$(function() {
+//				
+//					$('.thumb').epicHoverFadeZoom({
+//						 
+//							overlayColor:'#fff',						//Hex: #xxxx
+//							fontColor:'#000',							//Hex: #xxxx
+//							captionDirection:'topToBottom', 			//String: caption slide in/out direction
+//							opacity: 0.8,								//Integer: 0-1
+//							transitionSpeed:600,						//Integer: transitions speed, in milliseconds
+//							easing:'swing',								//String: easing method - see http://jqueryui.com/demos/effect/easing.html
+//							padding: 0,									//Integer: padding
+//							mobileActive:false,							//Boolean: whether to activate/deactivate for mobile
+//							zoom:50										//Integer: zoom factor
+//						 
+//					});	
+//				
+//				});
+				
+				/*epic fullscreen plugin
+				---------------------*/
+				
+				/*$(function() {
+				
+					$('.epicFullscreen').epicFullscreen({
+					 
+						opacity:0.3,
+						background:'#fff',
+						pattern:true
+					 
+					 });	
+						
+				});*/
+			
+			});
+			
+			/*twitter plugin
+			---------------------*/
+			
+			
+			
+			/*grid
+			---------------------*/
+			
+			/*init*/
+			$(function(){
+			
+				var cols = 3
+				var masonry = $('#grid');
+			
+				calculateCols();
+		
+				// initialize masonry
+				masonry.imagesLoaded(function(){
+					
+					masonry.masonry({
+						itemSelector: '.thumb',
+						isResizable: true,
+						columnWidth:Math.floor((masonry.width()/ cols))
+					  });
+					
+				});
+				
+			  /*resize*/
+			  $(window).resize(function(){
+					
+					
+					calculateCols();
+					
+					masonry.imagesLoaded(function(){
+					
+					  masonry.masonry({
+						itemSelector: '.thumb',
+						isResizable: false,
+						 isAnimated: false,
+						columnWidth:Math.floor((masonry.width() / cols))
+					  });
+				
+					});
+					
+				});
+				
+				function calculateCols (){
+				
+					if(masonry.width() <= 426){
+					
+						 cols=2;
+					 
+					}else{
+				
+						cols=3;
+				
+					}
+				}
+			
+		  });
+
+</script>
