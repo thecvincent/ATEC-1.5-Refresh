@@ -5,6 +5,82 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0" />
 <title>ATEC Redesign</title>
     <!--#include virtual="/atec/inc/head.html" -->
+    <link rel="stylesheet" type="text/css" href="css/udt_media_queries.css" />
+
+    <script type="text/javascript" src="/atec/js/jquery.masonry.js"></script>
+<script type="text/javascript">
+	
+			/*device check
+			---------------------*/
+			
+			var isMobile = false;
+	
+			if( navigator.userAgent.match(/Android/i) || 
+				navigator.userAgent.match(/webOS/i) ||
+				navigator.userAgent.match(/iPhone/i) || 
+				navigator.userAgent.match(/iPad/i)|| 
+				navigator.userAgent.match(/iPod/i) || 
+				navigator.userAgent.match(/BlackBerry/i)){
+								
+					isMobile = true;
+							
+			}
+			
+			
+			/*init*/
+			$(function(){
+			
+				var cols = 3
+				var masonry = $('#grid');
+			
+				calculateCols();
+		
+				// initialize masonry
+				masonry.imagesLoaded(function(){
+					
+					masonry.masonry({
+						itemSelector: '.thumb',
+						isResizable: true,
+						columnWidth:Math.floor((masonry.width()/ cols))
+					  });
+					
+				});
+				
+			  /*resize*/
+			  $(window).resize(function(){
+					
+					
+					calculateCols();
+					
+					masonry.imagesLoaded(function(){
+					
+					  masonry.masonry({
+						itemSelector: '.thumb',
+						isResizable: false,
+						 isAnimated: false,
+						columnWidth:Math.floor((masonry.width() / cols))
+					  });
+				
+					});
+					
+				});
+				
+				function calculateCols (){
+				
+					if(masonry.width() <= 426){
+					
+						 cols=2;
+					 
+					}else{
+				
+						cols=3;
+				
+					}
+				}
+			
+		  });
+
+</script>
 </head>
 <body>
 
@@ -22,6 +98,9 @@
     </div>
     
     <!--start grid-->
+  <article class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
     <div id="grid" class="clearfix">
       <div class="thumb thumb-type-2"> <a href="folio/project-1.html" title="Project-1" data-caption="caption"> <img src="images/project-1.jpg" alt="project 1"/> </a> </div>
       <div class="thumb thumb-type-1"> <a href="folio/project-2.html" data-caption="caption"> <img src="images/project-2.jpg" alt="project 1"/> </a> </div>
@@ -41,6 +120,9 @@
       <div class="thumb thumb-type-1"> <a href="folio/project-4.html" data-caption="caption"> <img src="images/project-6.jpg" alt="project 1"/> </a> </div>
       <div class="thumb thumb-type-1"> <a href="folio/project-5.html" data-caption="caption"> <img src="images/project-16.jpg" alt="project 1"/> </a> </div>
     </div>
+    </div>
+    </div>
+    </article>
   </section>
 </div>
 <!--start footer-->

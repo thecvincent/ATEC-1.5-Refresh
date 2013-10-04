@@ -4,12 +4,12 @@
 	$is_post=false;
 
 
-if($uri[3]){
+if(isset($uri[3])&&$uri[3]!=""){
 	$slug = $uri[3];
-	if($uri[4])$slug = $uri[4];
-	if($uri[5])$slug = $uri[5];
-	if($uri[6])$slug = $uri[6];
-	if($uri[7])$slug = $uri[7];
+	if(isset($uri[4])&&$uri[4]!="")$slug = $uri[4];
+	if(isset($uri[5])&&$uri[5]!="")$slug = $uri[5];
+	if(isset($uri[6])&&$uri[6]!="")$slug = $uri[6];
+	if(isset($uri[7])&&$uri[7]!="")$slug = $uri[7];
 	$json_url = 'http://atec.io/journal/?json=get_post&slug='.$slug;
  $is_post=true;
 }
@@ -84,7 +84,7 @@ $json_array = json_decode($result, true);
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0" />
 <title>ATEC News</title>
-<?php include '/info/www/atec/inc/head.html' ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/atec/inc/head.html' ?>
 <title>News in Arts and Technology at UT Dallas</title>
 
 <script type="text/javascript">
@@ -103,19 +103,13 @@ $json_array = json_decode($result, true);
 </head>
 
 <body>
-<?php include '/info/www/atec/inc/header.html'; ?>
+<?php
+
+ include $_SERVER['DOCUMENT_ROOT'].'/atec/inc/header.html'; ?>
 
 <!--start content-->
-<div id="content-wrapper">
- <section class="pages clearfix"> 
-  <!--start section title-->
-  <div id="section-title">
-   <h1>News</h1>
-  </div>
-  <!--start teaser-->
-  <div id="teaser">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
-  <h2>Posts | Categories</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum enim arcu, venenatis et ligula sed, mollis porttitor est. Nulla sit amet mauris a lectus semper dictum nec ac tellus. Aliquam tempor adipiscing massa id venenatis. Phasellus posuere, dui vitae semper faucibus, augue tortor porttitor justo, sit amet facilisis ligula justo vel neque. </p>
+ <h2 class="text-center">BLOG</h2>
+
   <?php
 
 $username = '';  // authentication in case we need it
@@ -144,8 +138,30 @@ $json_array = json_decode($result, true);
 
 // If we get a valid JSON File start listing things
 if($json_array["status"]=="ok"){
-	if($json_array['posts']){
-		
+	if(isset($json_array['posts'])){ ?>
+   <div style="text-align:center">
+    <section class="btn-group">
+      <button type="button" class="btn btn-default">Posts</button>
+      <button type="button" class="btn active btn-default">Collections</button>
+    </section>
+  </div>
+  <section id="sidescroll">
+    <menu type="list" class="collections">
+      <li class="academics" style="background-image:url(/atec/img/collections/academics.jpg);"><a href="#"><h4>Academics</h4><div>38 posts</div></a></li>
+      <li class="animation" style="background-image:url(/atec/img/collections/animation.jpg);"><a href="#"><h4>Animation</h4><div>38 posts</div></a></li>
+      <li class="building current" style="background-image:url(/atec/img/collections/building.jpg);"><a href="#"><h4>Building</h4><div>38 posts</div></a></li>
+      <li class="emac" style="background-image:url(/atec/img/collections/emac.jpg);"><a href="#"><h4>Emerging Media and Communication</h4><div>38 posts</div></a></li>
+      <li class="gd"  style="background-image:url(/atec/img/collections/game.jpg);"><a href="#"><h4>Game Design</h4><div>38 posts</div></a></li>
+      <li class="sound" style="background-image:url(/atec/img/collections/sound.jpg);"><a href="#"><h4>Sound Design</h4><div>38 posts</div></a></li>
+      <li class="steam" style="background-image:url(/atec/img/collections/steam.jpg);"><a href="#"><h4>STEM to STEAM</h4><div>38 posts</div></a></li>
+      <li class="research"><a href="#"><h4>Research</h4><div>38 posts</div></a></li>
+    </menu>
+  </section>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+ 
+	<?php	
 		if(isset($categoryName))echo "<h2>Category: ".$categoryName."</h2>"; 
 		if(isset($tagName))echo "<h2>Tagged with: ".$tagName."</h2>"; 
 		if(isset($monthName))echo "<h2>".$monthName."</h2>"; 
@@ -154,19 +170,54 @@ if($json_array["status"]=="ok"){
    foreach ($json_array['posts'] as $value) {
 	echo "<article><h3><a href=\"/atec/news/".substr($value['date'], 0, 4)."/".substr($value['date'], 5, 2)."/".$value['slug']."\">".$value['title']."</a></h3>";
 	preg_match('/<img.+src=[\'"](?P<src>.+)[\'"].*>/i', $value['content'], $post_image);
- echo "<img style=\"float:left; width:10rem; height:auto;  padding-right:1em;\" src=\"".$post_image['src']."\" >";			
+	if(isset($post_image['src']))echo "<img class=\"img-responsive\" src=\"".$post_image['src']."\" >";			
 	echo "<p>".substr(strip_tags($value['content']), 0, 300)."&hellip;</p><p><a href=\"\">Read More</a></p></article>";
    } ?>
    </section>
 			  <div class="load_more_posts">
     <a href='index.php?p=<?php echo $page ?>'>Load More</a>
   </div>
+  </div>
+  </div>
+  <p>&nbsp;</p>
+</article>
 <?php	}
-	if($json_array['post']){
+
+
+	if(isset($json_array['post'])){ ?>
+ <article class="container blogpost">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+ <?php
 	$post=$json_array['post'];
 	echo "<h3>".$post['title']."</h3>";
- echo $post['content'];
-
+ echo $post['content']; ?>
+       <footer>
+        <p><img src="/atec/img/portraits/ursula.jpg" class="img-circle pull-left" alt="" width="60" style="margin-right:12px;"><strong>Ursula Majoris</strong> (EMAC '13) is a graduate student focusing on the role of media and technology in the arts.</p>
+      </footer>
+</div></div>
+	  <div id="auxiliary" class="row">
+    <div class="col-xs-6 col-md-4 col-md-offset-2">
+      <h4>Related</h4>
+      <ul>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/08/comm-3342-changes/" title="Advanced Topics in Communication (COMM 3342) Topic Changes">Advanced Topics in Communication (COMM 3342) Topic Changes</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/08/a-tale-of-two-4372s-in-fall-2013/" title="A Tale of Two 4372s in Fall 2013">A Tale of Two 4372s in Fall 2013</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/08/atec-course-to-explore-crowd-funding/" title="ATEC Course to Explore Crowd Funding">ATEC Course to Explore Crowd Funding</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/07/new-atec-building-sight-of-next-nasher-xchange-work/" title="New ATEC Building Sight of Next Nasher XChange Work">New ATEC Building Sight of Next Nasher XChange Work</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/07/emac-course-explores-the-driving-force-behind-the-social-web/" title="EMAC Course Explores the Driving Force Behind the Social Web">EMAC Course Explores the Driving Force Behind the Social Web</a> </li>
+      </ul>
+    </div>
+    <div class="col-xs-6 col-md-4">
+      <h4>Recent</h4>
+      <ul>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/09/education-tech-firm-draws-heavily-on-talents-of-ut-dallas-grads/" title="Education Tech Firm Draws Heavily on Talents of UT Dallas Grads">Education Tech Firm Draws Heavily on Talents of UT Dallas Grads</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/09/frightlite/" title="FrightLite: ATEC’s Latest Short from Animation Studio Course">FrightLite: ATEC’s Latest Short from Animation Studio Course</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/08/atec-professor-to-present-as-part-of-centraltrak-next-topic-series/" title="ATEC Professor to Present as Part of CentralTrak Next Topic Series">ATEC Professor to Present as Part of CentralTrak Next Topic Series</a> </li>
+        <li> <a href="http://www.utdallas.edu/atec/blog/2013/08/atec-professor-receives-grant-for-social-media-mashup/" title="ATEC Professor Receives Grant for Social Media Mashup">ATEC Professor Receives Grant for Social Media Mashup</a> </li>
+      </ul>
+    </div>
+  </div>
+<?php
 	}
 	
 }
@@ -176,13 +227,10 @@ else{
 echo	"ERROR POSTS NOT FOUND";
 }
 
-
-
 ?>
- </section>
-</div>
-<?php include '/info/www/atec/inc/footer.html'; ?>
-<?php include '/info/www/atec/inc/tail.html'; ?>
-<?php include '/info/www/websvcs/shared/sdc.js' ?>
+
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/atec/inc/footer.html'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/atec/inc/tail.html'; ?>
 </body>
 </html>
