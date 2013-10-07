@@ -1,23 +1,30 @@
-   <div id="header-wrapper">
-  <div id="header-inner">
-    <header>
-      <div id="logo"> <a href="/atec/index.html">Branding logos</a> </div>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/atec/">Brand</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav navbar-right">
       
-      <!--mobileMenu toggle-->
-      <div class="mobileMenuToggle"><a href=""></a></div>
-      <nav>
-        <ul class="navigation">
-          <li><a href="#">About</a>
-            <ul class="sub-menu">
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li><a href="/atec/about/building/">Building</a></li>
               <li><a href="/atec/about/faq/">FAQ</a></li>
               <li><a href="/atec/about/mission/">Mission and history</a></li>
               <li><a href="/atec/about/achievements/">Achievements</a></li>
               <li><a href="/atec/about/contact/">Contact</a></li>
             </ul>
-          </li>
-          <li><a href="#">Academics</a>
-            <ul class="sub-menu">
+          </li>      
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Academics<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li><a href="/atec/academics/advising/">Advising</a></li>
               <li><a href="/atec/academics/courses/">Courses</a></li>
               <li><a href="/atec/academics/plans/">Degree Plans</a></li>
@@ -25,8 +32,8 @@
               <li><a href="/atec/academics/resources/">Resources</a></li>
             </ul>
           </li>
-          <li><a href="#">Research</a>
-            <ul class="sub-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Research<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li><a href="/atec/research/topics/">Topics</a></li>
               <li><a href="/atec/research/faculty/">Faculty</a></li>
               <li><a href="/atec/research/sponsors/">Sponsors</a></li>
@@ -35,8 +42,8 @@
             </ul>          
           </li>
           <li><a href="/atec/portfolio/">Portfolio</a></li>
-          <li><a href="#">People</a>
-            <ul class="sub-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">People<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li><a href="/atec/people/faculty/">Faculty</a></li>
               <li><a href="/atec/people/administrators/">Administrators</a></li>
               <li><a href="/atec/people/advisors/">Advisors</a></li>
@@ -48,8 +55,14 @@
           </li>
           <li><a href="/atec/events/">Events</a>
           </li>
-        </ul>
-      </nav>
-    </header>
+        <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
       </div>
-</div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    </ul>
+
+
+  </div><!-- /.navbar-collapse -->
+</nav>
